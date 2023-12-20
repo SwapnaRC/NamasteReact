@@ -3,8 +3,7 @@ import ResturantCard from "../ResturantCard/index";
 import Shimmer from "../Body/Shimmer";
 // import resData from "./mockdata.json";
 import "./body.css";
-import Search from "../Search";
-
+import { Link } from 'react-router-dom'
 const Body = () => {
   //   {
   //     data: {
@@ -59,15 +58,12 @@ const Body = () => {
 
   const fetchResturantData = async () => {
     const data = await fetch(
-     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9853591&lng=77.7081261&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-      // "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.2989156&lng=76.8778612&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9853591&lng=77.7081261&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
 
     const json = await data.json();
-    console.log( json)
-
     const responseResturant =
-      json.data.cards[2]?.card?.card?.gridElements.infoWithStyle.restaurants;
+      json.data.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setResList(responseResturant);
     setSearchFilterList(responseResturant);
   };
@@ -86,31 +82,37 @@ const Body = () => {
         >
           Top Rated Resturants
         </button>
-        
-          <input
-            className="research"
-            type="text"
-            value={searchText}
-            placeholder="Search your food..."
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-          <button
-            type="submit"
-            className="searchbtn"
-            onClick={() => {
-              const searchList = resList.filter((res) =>
-                res.info.name.toLowerCase().includes(searchText.toLowerCase())
-              );
-              setSearchFilterList(searchList);
-            }}
-          >
-            Search
-          </button>
-        
+
+        <input
+          className="research"
+          type="text"
+          value={searchText}
+          placeholder="Search your food..."
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <button
+          type="submit"
+          className="searchbtn"
+          onClick={() => {
+            const searchList = resList.filter((res) =>
+              res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setSearchFilterList(searchList);
+          }}
+        >
+          Search
+        </button>
       </div>
       <div className="restcard">
         {searchFilterList?.map((resturant) => {
-          return <ResturantCard key={resturant.info.id} resData={resturant} />;
+          return (
+            <Link
+              to={"/restaurants/" + resturant?.info?.id}
+              key={resturant?.info?.id}
+            >
+              <ResturantCard resData={resturant} />
+             </Link>
+          );
         })}
       </div>
     </>
