@@ -1,0 +1,7 @@
+#heading {
+    color: red;
+}
+.restcard{
+    display: flex;
+    flex-wrap: wrap;
+}
