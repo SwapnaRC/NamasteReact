@@ -61,14 +61,11 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json , 'json')
     const responseResturant =
       json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-      console.log(responseResturant, 'responseResturant')
     setResList(responseResturant);
     setSearchFilterList(responseResturant);
   };
-console.log(resList, 'resList')
   return resList.length === 0 ? (
     <Shimmer />
   ) : (

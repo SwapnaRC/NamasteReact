@@ -1,6 +1,6 @@
 import "./searchstyle.css";
+
 export default SearchComponent = ({searchRestruant, setSearchResturant,onSearchHanlder } = props) => {
-console.log(searchRestruant, 'searchRestruant')
   return (
     <>
       <div>

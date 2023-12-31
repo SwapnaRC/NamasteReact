@@ -6,15 +6,15 @@ class UserClass extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(() => {
-      console.log("timer in class component");
-    }, 1000);
+    // this.timer = setInterval(() => {
+    //   console.log("timer in class component");
+    // }, 1000);
   }
   componentDidUpdate() {
     console.log("component did update");
   }
   componentWillUnmount() {
-    clearInterval(this.timer);
+    // clearInterval(this.timer);
     console.log("component unmount");
   }
   render() {
