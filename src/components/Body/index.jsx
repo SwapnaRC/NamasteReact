@@ -1,56 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ResturantCard from "../ResturantCard/index";
 import Shimmer from "../Body/Shimmer";
 import "./body.css";
-import { Link } from 'react-router-dom'
-const Body = () => {
-  //   {
-  //     data: {
-  //       id: "334475",
-  //       name: "Domino's",
-  //       uuid: "eaed0e3b-7c0e-4367-8f59-f41d309fb93c",
-  //       city: "1",
-  //       area: "BTM Layout",
-  //       totalRatingsString: "500+ ratings",
-  //       avgRating: "4",
-  //       deliveryTime: 29,
-  //       cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-  //       cuisines: ["Burgers", "Biryani", "American", "Snacks", "Fast Food"],
-  //     },
-  //   },
-  //   {
-  //     data: {
-  //       id: "334475",
-  //       name: "Burger King",
-  //       uuid: "eaed0e3b-7c0e-4367-8f59-f41d309fb93b",
-  //       city: "1",
-  //       area: "BTM Layout",
-  //       totalRatingsString: "500+ ratings",
-  //       avgRating: "4.2",
-  //       deliveryTime: 29,
-  //       cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-  //       cuisines: ["Burgers", "Biryani", "American", "Snacks", "Fast Food"],
-  //     },
-  //   },
-  //   {
-  //     data: {
-  //       id: "334475",
-  //       name: "KFC",
-  //       uuid: "eaed0e3b-7c0e-4367-8f59-f41d309fb93f",
-  //       city: "1",
-  //       area: "BTM Layout",
-  //       totalRatingsString: "500+ ratings",
-  //       avgRating: "3.8",
-  //       deliveryTime: 29,
+import { Link } from "react-router-dom";
+import Search from "../Search";
 
-  //       cloudinaryImageId: "bdcd233971b7c81bf77e1fa4471280eb",
-  //       cuisines: ["Burgers", "Biryani", "American", "Snacks", "Fast Food"],
-  //     },
-  //   },
-  // ];
-  const [resList, setResList] = useState([]);
+const Body = () => {
+  const [listofResturant, setListofResturant] = useState([]);
   const [searchText, setSearchText] = useState();
   const [searchFilterList, setSearchFilterList] = useState([]);
+
   useEffect(() => {
     fetchResturantData();
   }, []);
@@ -63,10 +22,18 @@ const Body = () => {
     const json = await data.json();
     const responseResturant =
       json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-    setResList(responseResturant);
+    setListofResturant(responseResturant);
     setSearchFilterList(responseResturant);
   };
-  return resList.length === 0 ? (
+
+  const searchHandler = () => {
+    const searchList = listofResturant.filter((res) =>
+      res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setSearchFilterList(searchList);
+  };
+
+  return listofResturant.length === 0 ? (
     <Shimmer />
   ) : (
     <>
@@ -74,32 +41,20 @@ const Body = () => {
         <button
           className="filter-topratedres"
           onClick={() => {
-            const filterList = resList.filter((res) => res.info.avgRating >= 4);
-            setResList(filterList);
+            const filterdResList = listofResturant.filter(
+              (res) => res.info.avgRating >= 4
+            );
+            setListofResturant(filterdResList);
           }}
         >
           Top Rated Resturants
         </button>
-
-        <input
-          className="research"
-          type="text"
-          value={searchText}
-          placeholder="Search your food..."
-          onChange={(e) => setSearchText(e.target.value)}
+        <Search
+          searchText={searchText}
+          setSearchText={setSearchText}
+          listofResturant={listofResturant}
+          setSearchFilterList={setSearchFilterList}
         />
-        <button
-          type="submit"
-          className="searchbtn"
-          onClick={() => {
-            const searchList = resList.filter((res) =>
-              res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
-            );
-            setSearchFilterList(searchList);
-          }}
-        >
-          Search
-        </button>
       </div>
       <div className="restcard">
         {searchFilterList?.map((resturant) => {
@@ -109,7 +64,7 @@ const Body = () => {
               key={resturant?.info?.id}
             >
               <ResturantCard resData={resturant} />
-             </Link>
+            </Link>
           );
         })}
       </div>

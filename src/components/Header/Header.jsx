@@ -2,8 +2,10 @@ import React from "react";
 import "./header.css";
 import { LOGO_URL } from "../../utils/constants";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../../utils/useOnlineStatus";
 
 export const Header = () => {
+  const onlineStatus = useOnlineStatus()
   return (
     <div className="header-container">
       <div className="logo-container">
@@ -11,6 +13,7 @@ export const Header = () => {
       </div>
       <div className="header-menu">
         <ul>
+        <li>Online Status:</li> <li className={onlineStatus ? "online" : "offline"}></li>
           <li>
             <Link to="/">Home</Link>
           </li>
