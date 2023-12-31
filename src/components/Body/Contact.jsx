@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
 const Contact = () => {
-    return(
-        <div>Contact us page</div>
-    )
-}
+  useEffect(() => {
+    const timer = setInterval(() => {
+      console.log("use effect mounting");
+    }, 1000);
+    return () => {
+        // clear the interval so all resource will closed 
+      console.log("UseEffect Contact us unmounted");
 
-export default Contact
+      clearInterval(timer);
+    };
+  }, []);
+  return <div>Contact us page</div>;
+};
+
+export default Contact;

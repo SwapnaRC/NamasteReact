@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ResturantCard from "../ResturantCard/index";
 import Shimmer from "../Body/Shimmer";
-// import resData from "./mockdata.json";
 import "./body.css";
 import { Link } from 'react-router-dom'
 const Body = () => {
@@ -62,12 +61,14 @@ const Body = () => {
     );
 
     const json = await data.json();
+    console.log(json , 'json')
     const responseResturant =
-      json.data.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      console.log(responseResturant, 'responseResturant')
     setResList(responseResturant);
     setSearchFilterList(responseResturant);
   };
-
+console.log(resList, 'resList')
   return resList.length === 0 ? (
     <Shimmer />
   ) : (
