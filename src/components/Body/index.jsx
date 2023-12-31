@@ -26,12 +26,6 @@ const Body = () => {
     setSearchFilterList(responseResturant);
   };
 
-  const searchHandler = () => {
-    const searchList = listofResturant.filter((res) =>
-      res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-    setSearchFilterList(searchList);
-  };
 
   return listofResturant.length === 0 ? (
     <Shimmer />
