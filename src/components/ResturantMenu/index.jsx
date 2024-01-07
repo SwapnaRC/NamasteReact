@@ -7,7 +7,6 @@ import useResturantMenu from "../../utils/useResturantMenu";
 const ResturantMenu = () => {
   const { restaurantId } = useParams();
   const menuListItem = useResturantMenu(restaurantId);
-  console.log(menuListItem, "menulist item");
 
   if (menuListItem === null) return <Shimmer />;
 

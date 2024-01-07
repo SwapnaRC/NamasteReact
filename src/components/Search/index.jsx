@@ -9,15 +9,14 @@ const Search = ({
   return (
     <>
      <input
-        className="search"
+        className="border border-black h-10 px-2 w-2/3 rounded-md my-2"
         type="text"
         value={searchText}
         placeholder="Search your food..."
         onChange={(e) => setSearchText(e.target.value)}
       />
       <button
-        type="submit"
-        className="searchbtn"
+        className="p-1 h-10 bg-green-400 my-2 m-1 w-24 rounded-lg"
         onClick={() => {
           const searchList = listofResturant.filter((res) =>
             res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
