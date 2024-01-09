@@ -1,12 +1,12 @@
-.restcontainer{
+/* .restcontainer{ */
     /* border: 1px solid black; */
-    margin: 5px;
+    /* margin: 5px;
     padding: 5px;
-    width: 200px;
+    width: 200px; */
     /* display: flex;
      justify-content: space-between; */
-}
-.resturantImage{
+/* } */
+/* .resturantImage{
     height: calc(81px);
     background: linear-gradient(rgba(27, 30, 36, 0) 0%, rgb(27, 30, 36) 84.21%);
     border-radius: 10%;
@@ -30,7 +30,7 @@
 
 .rescostfor{
     line-height: 24px;  
-    font-family: "Basis Grotesque Pro";
+    font-family: "Basis Grotesque Pro"; 
     font-size: 16px;
     color: rgba(2, 6, 12, 0.6);
 }
@@ -40,6 +40,6 @@
 }
 
 .deliveryTime{
-    /* display: flex ; */
+    /* display: flex ; *
     justify-content: flex-end;
-}
+}*/

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import ResturantCard from "../ResturantCard/index";
 import Shimmer from "../Body/Shimmer";
-import "./body.css";
 import { Link } from "react-router-dom";
 import Search from "../Search";
 
@@ -9,7 +8,7 @@ const Body = () => {
   const [listofResturant, setListofResturant] = useState([]);
   const [searchText, setSearchText] = useState();
   const [searchFilterList, setSearchFilterList] = useState([]);
-
+  
   useEffect(() => {
     fetchResturantData();
   }, []);
@@ -21,7 +20,7 @@ const Body = () => {
 
     const json = await data.json();
     const responseResturant =
-      json.data.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      json.data.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setListofResturant(responseResturant);
     setSearchFilterList(responseResturant);
   };
@@ -31,12 +30,12 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="body-container">
+      <div className="flex">
         <button
-          className="filter-topratedres"
+          className="m-2 px-2 bg-orange-400 h-10 rounded-lg"
           onClick={() => {
             const filterdResList = listofResturant.filter(
-              (res) => res.info.avgRating >= 4
+              (res) => res.info.avgRating >= 4.1
             );
             setListofResturant(filterdResList);
           }}
@@ -46,12 +45,12 @@ const Body = () => {
         <Search
           searchText={searchText}
           setSearchText={setSearchText}
-          listofResturant={listofResturant}
+          listofResturant={listofResturant }
           setSearchFilterList={setSearchFilterList}
         />
       </div>
-      <div className="restcard">
-        {searchFilterList?.map((resturant) => {
+      <div className="flex flex-wrap">
+        {searchFilterList.length > 0 ? searchFilterList?.map((resturant) => {
           return (
             <Link
               to={"/restaurants/" + resturant?.info?.id}
@@ -59,8 +58,8 @@ const Body = () => {
             >
               <ResturantCard resData={resturant} />
             </Link>
-          );
-        })}
+          ) ;
+        }): <h1> No results found</h1>}
       </div>
     </>
   );
