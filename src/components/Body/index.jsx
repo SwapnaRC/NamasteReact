@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
-import ResturantCard from "../ResturantCard/index";
+import { useContext, useEffect, useState } from "react";
+import ResturantCard, { WithPromtedLabel } from "../ResturantCard/index";
 import Shimmer from "../Body/Shimmer";
 import { Link } from "react-router-dom";
 import Search from "../Search";
+import UserContext from "../../utils/UserContext";
 
 const Body = () => {
   const [listofResturant, setListofResturant] = useState([]);
   const [searchText, setSearchText] = useState();
   const [searchFilterList, setSearchFilterList] = useState([]);
   
+  const ResturantCardPromted = WithPromtedLabel(ResturantCard)
+  const { LoggedInUserName, setUserName} = useContext(UserContext)
   useEffect(() => {
     fetchResturantData();
   }, []);
@@ -24,8 +27,7 @@ const Body = () => {
     setListofResturant(responseResturant);
     setSearchFilterList(responseResturant);
   };
-
-
+  // console.log(listofResturant);
   return listofResturant.length === 0 ? (
     <Shimmer />
   ) : (
@@ -45,21 +47,31 @@ const Body = () => {
         <Search
           searchText={searchText}
           setSearchText={setSearchText}
-          listofResturant={listofResturant }
+          listofResturant={listofResturant}
           setSearchFilterList={setSearchFilterList}
         />
       </div>
+      {/* setting the username using input box */}
+      <input className="p-2 border-black border " value={LoggedInUserName}  onChange={(e) => setUserName(e.target.value)}/>
       <div className="flex flex-wrap">
-        {searchFilterList.length > 0 ? searchFilterList?.map((resturant) => {
-          return (
-            <Link
-              to={"/restaurants/" + resturant?.info?.id}
-              key={resturant?.info?.id}
-            >
-              <ResturantCard resData={resturant} />
-            </Link>
-          ) ;
-        }): <h1> No results found</h1>}
+        {searchFilterList.length > 0 ? (
+          searchFilterList?.map((resturant) => {
+            return (
+              <Link
+                to={"/restaurants/" + resturant?.info?.id}
+                key={resturant?.info?.id}
+              >
+                {resturant?.info?.promoted ? (
+                  <ResturantCardPromted resData={resturant} />
+                ) : (
+                  <ResturantCard resData={resturant} />
+                )}
+              </Link>
+            );
+          })
+        ) : (
+          <h1> No results found</h1>
+        )}
       </div>
     </>
   );
