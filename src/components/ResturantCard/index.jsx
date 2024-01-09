@@ -27,9 +27,9 @@ const ResturantCard = (props) => {
           />
         )}
         {resData?.info?.avgRating}
-        <span className="deliveryTime">
+        {resData?.info?.deliveryTime && <span className="deliveryTime">
           {resData?.info?.deliveryTime} minutes
-        </span>
+        </span>}
       </div>
       <div className="resCusine">
         {resData?.info?.cuisines?.length >= 30
