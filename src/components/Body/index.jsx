@@ -1,17 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import ResturantCard, { WithPromtedLabel } from "../ResturantCard/index";
-import Shimmer from "../Body/Shimmer";
+import ResturantCard, { WithPromtedLabel } from "./ResturantCard";
+import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import Search from "../Search";
-import UserContext from "../../utils/UserContext";
+import Search from "./Search";
 
 const Body = () => {
   const [listofResturant, setListofResturant] = useState([]);
   const [searchText, setSearchText] = useState();
   const [searchFilterList, setSearchFilterList] = useState([]);
-  
-  const ResturantCardPromted = WithPromtedLabel(ResturantCard)
-  const { LoggedInUserName, setUserName} = useContext(UserContext)
+
+  const ResturantCardPromted = WithPromtedLabel(ResturantCard);
+
   useEffect(() => {
     fetchResturantData();
   }, []);
@@ -27,7 +26,7 @@ const Body = () => {
     setListofResturant(responseResturant);
     setSearchFilterList(responseResturant);
   };
-  // console.log(listofResturant);
+
   return listofResturant.length === 0 ? (
     <Shimmer />
   ) : (
@@ -51,8 +50,6 @@ const Body = () => {
           setSearchFilterList={setSearchFilterList}
         />
       </div>
-      {/* setting the username using input box */}
-      <input className="p-2 border-black border " value={LoggedInUserName}  onChange={(e) => setUserName(e.target.value)}/>
       <div className="flex flex-wrap">
         {searchFilterList.length > 0 ? (
           searchFilterList?.map((resturant) => {

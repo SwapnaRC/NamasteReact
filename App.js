@@ -1,13 +1,13 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./src/components/Header/Header";
+import Header from "./src/components/Body/Header";
 import "./index.css";
 import Body from "./src/components/Body";
 import About from "./src/components/Body/About";
-import Error from "./src/components/Error";
+import Error from "./src/components/Body/Error";
 import Contact from "./src/components/Body/Contact";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import ResturantMenu from "./src/components/ResturantMenu";
+import ResturantMenu from "./src/components/Body/ResturantMenu";
 import UserContext from "./src/utils/UserContext";
 
 const App = () => {
