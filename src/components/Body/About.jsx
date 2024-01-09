@@ -11,14 +11,10 @@ class About extends React.Component {
   async componentDidMount(){
     // https://api.github.com/users/SwapnaRC 
     const data=  await fetch("https://api.github.com/users/SwapnaRC");
-    console.log(data, 'data')
     const abtUserData = await data.json();
-    console.log(abtUserData, 'abtUserData')
     this.setState({ userData: abtUserData})
   }
-  componentDidUpdate(){
-    console.log("component did update")
-  }
+
   render() {
     const {avatar_url, name, location  } = this.state.userData
     return (
