@@ -1,5 +1,3 @@
-import "./searchstyle.css";
-
 const Search = ({
   searchText,
   setSearchText,
