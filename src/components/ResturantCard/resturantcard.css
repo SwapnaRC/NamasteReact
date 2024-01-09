@@ -1,0 +1,45 @@
+.restcontainer{
+    /* border: 1px solid black; */
+    margin: 5px;
+    padding: 5px;
+    width: 200px;
+    /* display: flex;
+     justify-content: space-between; */
+}
+.resturantImage{
+    height: calc(81px);
+    background: linear-gradient(rgba(27, 30, 36, 0) 0%, rgb(27, 30, 36) 84.21%);
+    border-radius: 10%;
+    width: 200px;
+    height: 180px;
+
+}
+.resRatingDelivery{
+    font-family: "Basis Grotesque Pro";
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+}
+.resCusine{
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 24px;
+    letter-spacing: -0.3px;
+    color: rgba(2, 6, 12, 0.6);
+}
+
+.rescostfor{
+    line-height: 24px;  
+    font-family: "Basis Grotesque Pro";
+    font-size: 16px;
+    color: rgba(2, 6, 12, 0.6);
+}
+
+.staricon{
+    margin-right: 10px;
+}
+
+.deliveryTime{
+    /* display: flex ; */
+    justify-content: flex-end;
+}

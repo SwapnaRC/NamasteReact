@@ -1,0 +1,34 @@
+.header-container {
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+ /* .logo-container{
+    display: flex;
+} */
+.header-logo{
+    width: 100px;
+}
+.header-menu{
+    padding:  0px 20px;
+
+}
+.header-menu > ul {
+    font-size: 18px;
+    display: flex;
+    list-style-type: none;
+}
+.header-menu > ul > li{
+    padding: 10px;
+    margin: 10px
+}
+/* .header-menu  {
+  display: flex;
+
+  justify-content: space-between; 
+}  */
+
+
+/* .header-menu > ul> li { 
+    display: inline;
+} */
