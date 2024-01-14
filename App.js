@@ -9,6 +9,9 @@ import Contact from "./src/components/Body/Contact";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import ResturantMenu from "./src/components/Body/ResturantMenu";
 import UserContext from "./src/utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./src/utils/store/appStore";
+import Cart from "./src/components/Body/Cart";
 
 const App = () => {
   const [userName, setUserName] = useState(null);
@@ -21,13 +24,17 @@ const App = () => {
   }, []);
 
   return (
-    // passing the setUserName so u can change the user name from other component as well 
-    <UserContext.Provider value={{ LoggedInUserName: userName, setUserName }}>
-      <div className="root">
-        <Header />
-        <Outlet />
-      </div>
-    </UserContext.Provider>
+    // Configure the store to our app
+    <Provider store={appStore}>
+      {/* passing the setUserName so u can change the user name from other
+      component as well */}
+      <UserContext.Provider value={{ LoggedInUserName: userName, setUserName }}>
+        <div className="root">
+          <Header />
+          <Outlet />
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -68,6 +75,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurants/:restaurantId",
         element: <ResturantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,
