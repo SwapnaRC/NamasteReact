@@ -1,17 +1,17 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
-import Header from "./src/components/Body/Header";
+import Header from "./src/components/Header";
 import "./index.css";
 import Body from "./src/components/Body";
-import About from "./src/components/Body/About";
-import Error from "./src/components/Body/Error";
-import Contact from "./src/components/Body/Contact";
+import About from "./src/components/About";
+import Error from "./src/components/Error";
+import Contact from "./src/components/Contact";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import ResturantMenu from "./src/components/Body/ResturantMenu";
+import ResturantMenu from "./src/components/ResturantMenu";
 import UserContext from "./src/utils/UserContext";
 import { Provider } from "react-redux";
 import appStore from "./src/utils/store/appStore";
-import Cart from "./src/components/Body/Cart";
+import Cart from "./src/components/Cart";
 
 const App = () => {
   const [userName, setUserName] = useState(null);
@@ -38,7 +38,7 @@ const App = () => {
   );
 };
 
-const Grocery = lazy(() => import("./src/components/Body/Grocery"));
+const Grocery = lazy(() => import("./src/components/Grocery"));
 
 const appRouter = createBrowserRouter([
   {

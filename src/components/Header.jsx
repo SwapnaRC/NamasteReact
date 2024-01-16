@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
 import { useSelector } from "react-redux";
-// import { LOGO_URL } from "../../utils/constants";
-import logo from '../../assets/apple-touch-icon.png'
+import logo from '../assets/apple-touch-icon.png'
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../../utils/useOnlineStatus";
-import UserContext from "../../utils/UserContext";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 export const Header = () => {
   const onlineStatus = useOnlineStatus();
