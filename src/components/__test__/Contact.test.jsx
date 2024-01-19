@@ -16,13 +16,11 @@ test("Contact us page should render", () => {
 test("Should render 2 input box", () => {
     render(<Contact />)
     const inputBoxes = screen.getAllByRole("textbox")
-    console.log(inputBoxes)
     expect(inputBoxes.length).toBe(2)
 })
 test("Should render inside the contact component", () => {
     render(<Contact />)
     const inputBoxe = screen.getByPlaceholderText("name")
-    console.log(inputBoxe)
     expect(inputBoxe).toBeInTheDocument()
 })
 

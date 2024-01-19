@@ -3,7 +3,7 @@ import { IMAGE_CDN_URL } from "../utils/constants";
 
 const ResturantCard = (props) => {
   const { resData } = props;
-
+  console.log(resData, 'rssData')
   return (
     <div className="hover:shadow-lg hover:bg-slate-100 border-cyan-950-200 p-2 m-1 w-48 " key={resData?.info?.id}>
       <img

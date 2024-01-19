@@ -1,9 +1,7 @@
-import { Sum } from "../sum";
+import { sum } from '../sum'
 
-describe("Sum test cases", () => {
-  test("Sum of two numbers", () => {
-    const result = Sum(3, 5);
-    // Assertion   
-    expect(result).toBe(8);
-  });
+test("should render the sum", () => {
+  const result = sum(3, 5);
+  // Assertion
+  expect(result).toBe(8);
 });
