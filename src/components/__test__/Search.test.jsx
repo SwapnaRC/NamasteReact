@@ -15,5 +15,6 @@ describe("Search component", () => {
     );
     const searchBtn = screen.getByRole("button");
     expect(searchBtn).toBeInTheDocument();
+  
   });
 });

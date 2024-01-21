@@ -4,6 +4,7 @@ import Cart from "../Cart";
 import Header from "../Header";
 import ResturantMenu from "../ResturantMenu";
 import appStore from "../../utils/store/appStore";
+import { act } from "react-dom/test-utils";
 import "@testing-library/jest-dom";
 import Mock_data_restMenu from "../../mocks/mockResturantMenu.json";
 import { BrowserRouter } from "react-router-dom";
@@ -26,9 +27,13 @@ describe("Cart component", () => {
         </Provider>
       </BrowserRouter>
     );
-    const accordionHeader = screen.getByText("Recommended (20)");
-    fireEvent.click(accordionHeader);
-    expect(screen.getAllByTestId('fooditems').length).toBe(20);
+    
+    act(() => {
+      const accordionHeader = screen.getByTestId("menu-category");
+      fireEvent.click(accordionHeader);
+      expect(screen.getAllByTestId("fooditems").length).toBe(20);
+    });
+
     // expect(accordionHeader).toBeInTheDocument()
   });
 });

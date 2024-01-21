@@ -44,14 +44,11 @@ const Body = () => {
         >
           Top Rated Resturants
         </button>
-        <input
-          className="border border-black h-10 px-2 w-2/3 rounded-md my-2"
-          type="text"
-          value={searchText}
-          placeholder="Search your food..."
-          data-testid="searchInput"
-          onChange={(e) => setSearchText(e.target.value)}
-        />
+        <Search
+          searchText={searchText}
+          setSearchText={setSearchText}
+          listofResturant={listofResturant}
+          setSearchFilterList={setSearchFilterList} />
         <button
           className="p-1 h-10 bg-green-400 my-2 m-1 w-24 rounded-lg"
           onClick={() => {

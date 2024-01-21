@@ -11,7 +11,7 @@ const ResturantCategory = ({ category, showItems, setShowItems }) => {
         className="flex justify-between cursor-pointer"
         onClick={handleClick}
       >
-        <span className="font-bold text-lg">
+        <span className="font-bold text-lg" data-testid="menu-category">
           {category.title} ({category.itemCards.length})
         </span>
         {!showItems ? <span> 🔽</span> : <span>🔼 </span>}
