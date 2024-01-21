@@ -5,9 +5,9 @@
 
 /** @type {import('jest').Config} */
 const config = {
-  // moduleNameMapper: {
-  //   "\\.(jpg|jpeg|png)$": "mocks/logo.js",
-  // },
+  moduleNameMapper: {
+    "\\.(jpg|jpeg|png)$": "../mocks/fileMock.js",
+  },
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 

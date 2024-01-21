@@ -4,6 +4,10 @@ const Search = ({
   listofResturant,
   setSearchFilterList,
 } = props) => {
+  console.log( searchText,
+    setSearchText,
+    listofResturant,
+    setSearchFilterList, 'props')
   return (
     <>
      <input
@@ -11,6 +15,7 @@ const Search = ({
         type="text"
         value={searchText}
         placeholder="Search your food..."
+        data-testid="searchInput"
         onChange={(e) => setSearchText(e.target.value)}
       />
       <button
