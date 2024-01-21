@@ -49,19 +49,8 @@ const Body = () => {
           setSearchText={setSearchText}
           listofResturant={listofResturant}
           setSearchFilterList={setSearchFilterList} />
-        <button
-          className="p-1 h-10 bg-green-400 my-2 m-1 w-24 rounded-lg"
-          onClick={() => {
-            const searchList = listofResturant.filter((res) =>
-              res?.info?.name.toLowerCase().includes(searchText.toLowerCase())
-            );
-            setSearchFilterList(searchList);
-          }}
-        >
-          Search
-        </button>
       </div>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-evenly">
         {searchFilterList?.length > 0 ? (
           searchFilterList?.map((resturant) => {
             return (
