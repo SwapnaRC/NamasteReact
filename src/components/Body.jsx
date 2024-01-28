@@ -22,12 +22,13 @@ const Body = () => {
 
     const json = await data.json();
     const responseResturant =
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
     setListofResturant(responseResturant);
     setSearchFilterList(responseResturant);
   };
   console.log(listofResturant, "listofResturant");
-  return listofResturant.length === 0 ? (
+  return listofResturant?.length === 0 ? (
     <Shimmer />
   ) : (
     <>
@@ -35,7 +36,7 @@ const Body = () => {
         <button
           className="m-2 px-2 bg-orange-400 h-10 rounded-lg"
           onClick={() => {
-            const filterdResList = listofResturant.filter(
+            const filterdResList = listofResturant?.filter(
               (res) => res.info.avgRating >= 4.1
             );
             setListofResturant(filterdResList);
@@ -47,11 +48,10 @@ const Body = () => {
           searchText={searchText}
           setSearchText={setSearchText}
           listofResturant={listofResturant}
-          setSearchFilterList={setSearchFilterList}
-        />
+          setSearchFilterList={setSearchFilterList} />
       </div>
-      <div className="flex flex-wrap">
-        {searchFilterList.length > 0 ? (
+      <div className="flex flex-wrap justify-evenly">
+        {searchFilterList?.length > 0 ? (
           searchFilterList?.map((resturant) => {
             return (
               <Link

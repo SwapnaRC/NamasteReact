@@ -56,3 +56,16 @@ React Hooks
 when u import u need to import hooks as named hooked
 -useState ===>  Whenever state is changes react will re-render my component
 
+
+Mounting and unmounting the component using useEffect 
+   useEffect(() => {
+     const timer = setInterval(() => {
+       console.log("use effect mounting");
+     }, 1000);
+     return () => {
+          clear the interval so all resource will closed 
+       console.log("UseEffect Contact us unmounted");
+
+       clearInterval(timer);
+     };
+   }, []);

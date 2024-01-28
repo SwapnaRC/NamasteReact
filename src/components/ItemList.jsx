@@ -1,6 +1,6 @@
-import { IMAGE_CDN_URL } from "../../utils/constants";
+import { IMAGE_CDN_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
-import { addItem } from "../../utils/slice/cartSlice";
+import { addItem } from "../utils/slice/cartSlice";
 
 const ItemList = ({ items }) => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const ItemList = ({ items }) => {
     <div className="">
       {items.map((item) => (
         <div
+          data-testid="fooditems"
           className="p-2 m-2 border-b-2 border-b-gray-200 text-left flex justify-between"
           key={item?.card?.info?.id}
         >

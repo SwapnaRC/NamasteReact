@@ -1,16 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useSelector } from "react-redux";
-// import { LOGO_URL } from "../../utils/constants";
-import logo from '../../assets/apple-touch-icon.png'
+import logo from '../assets/logo.jpg'
+// import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../../utils/useOnlineStatus";
-import UserContext from "../../utils/UserContext";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 export const Header = () => {
   const onlineStatus = useOnlineStatus();
   const { LoggedInUserName } = useContext(UserContext);
-  const cartItems = useSelector((store) => store.cart.items);
+  const cartItems = useSelector((store) => store.cart.items); 
 
+  const [loginBtnText, setLoginBtnText] = useState("Login");
   return (
     <div className="flex justify-between m-15 shadow-lg bg-slate-50 mb-8 ">
       <div className="logo-container">
@@ -32,6 +33,18 @@ export const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li className="px-4">
+            <button
+              className=""
+              onClick={() =>
+                loginBtnText === "Login"
+                  ? setLoginBtnText("Logout")
+                  : setLoginBtnText("Login")
+              }
+            >
+              {loginBtnText}
+            </button>
+          </li>
+          <li className="px-4">
             <Link to="/cart">
               Cart 🛒
               <span
@@ -42,6 +55,7 @@ export const Header = () => {
               </span>
             </Link>
           </li>
+
           <li className="px-4 text-sm font-bold"> 🙎{LoggedInUserName}</li>
         </ul>
       </div>
