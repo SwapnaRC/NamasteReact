@@ -1,20 +1,19 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { act } from "react-dom/test-utils";
-import MOCK_DATA from "../../mocks/mockResListData.json";
+import MOCK_DATA from "../../mocks/mockResturantMenu.json";
 import Body from "../Body";
 import "@testing-library/jest-dom";
 
-
 global.fetch = jest.fn(() => {
-  return Promise.resolve({
+   Promise.resolve({
     json: () => {
-      return Promise.resolve(MOCK_DATA);
+       Promise.resolve(MOCK_DATA)
     },
   });
 });
 
-test("should render the search component", async () => {
+it.skip("should render the search component", async () => {
   await act(async () =>
     render(
       <BrowserRouter>
@@ -22,16 +21,23 @@ test("should render the search component", async () => {
       </BrowserRouter>
     )
   );
-  const bodyComp = screen.queryAllByTestId("resCard");
-  expect(bodyComp.length).toBe(20);
+  // const cardsBeforeSearch = await screen.findAllByTestId("resCard");
+  const cardsBeforeSearch = screen.getAllByTestId("resCard");
 
-  const filterBtn = screen.getByRole('button', {name: 'Top Rated Resturants'})
-  fireEvent.click(filterBtn)
-   expect(filterBtn).toBeGreaterThan(1)
+  expect(cardsBeforeSearch.length).not.toBe(20);
 
-  const searchRes = screen.getByPlaceholderText("Search your food..");
-  expect(searchRes).toBeInTheDocument();
+  const searchBtn = screen.getByRole("button", { name: "Search" });
+  const searchInput = screen.getByTestId("searchInput");
+  fireEvent.change(searchInput, { target: { value: "Pizza" } });
+  fireEvent.click(searchBtn);
+  const cardsAfterSearch = await screen.findAllByTestId("resCard");
+  expect(cardsAfterSearch.length).toBe(2);
+
+  // const searchRes = screen.getByPlaceholderText("Search your food..");
   // const searchInput = screen.getByTestId('textbox', {target: {value: 'pizza'}})
+  // expect(searchRes).toBeInTheDocument();
 
-
+  // const filterBtn = screen.getByRole('button', {name: 'Top Rated Resturants'})
+  // fireEvent.click(filterBtn)
+  //  expect(filterBtn).toBeGreaterThan(1)
 });

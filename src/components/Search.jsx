@@ -4,10 +4,6 @@ const Search = ({
   listofResturant,
   setSearchFilterList,
 } = props) => {
-  console.log( searchText,
-    setSearchText,
-    listofResturant,
-    setSearchFilterList, 'props')
   return (
     <>
      <input

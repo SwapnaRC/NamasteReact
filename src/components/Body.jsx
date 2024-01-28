@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ResturantCard, { WithPromtedLabel } from "./ResturantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-import Search from "./Search";
+// import Search from "./Search";
 
 const Body = () => {
   const [listofResturant, setListofResturant] = useState([]);
@@ -21,11 +21,15 @@ const Body = () => {
     );
 
     const json = await data.json();
-    const responseResturant =
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-    setListofResturant(responseResturant);
-    setSearchFilterList(responseResturant);
+    // const responseResturant =
+    //   json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+    //     ?.restaurants;
+    setListofResturant(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setSearchFilterList(
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
   console.log(listofResturant, "listofResturant");
   return listofResturant?.length === 0 ? (
@@ -44,14 +48,33 @@ const Body = () => {
         >
           Top Rated Resturants
         </button>
-        <Search
-          searchText={searchText}
-          setSearchText={setSearchText}
-          listofResturant={listofResturant}
-          setSearchFilterList={setSearchFilterList} />
+
+        <input
+          className="border border-black h-10 px-2 w-2/3 rounded-md my-2"
+          type="text"
+          value={searchText}
+          placeholder="Search your food..."
+          data-testid="searchInput"
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <button
+          className="p-1 h-10 bg-green-400 my-2 m-1 w-24 rounded-lg"
+          onClick={() => {
+            const searchList = listofResturant.filter((res) => {
+              console.log(listofResturant, "listofResturant");
+              return res?.info?.name
+                .toLowerCase()
+                .includes(searchText.toLowerCase());
+            });
+            setSearchFilterList(searchList);
+          }}
+        >
+          Search
+        </button>
       </div>
-      <div className="flex flex-wrap justify-evenly">
-        {searchFilterList?.length > 0 ? (
+      <div className="flex flex-wrap justify-evenly" data-testid="resCards">
+        {console.log(searchFilterList?.length, "searchFilterList?.length ")}
+        {searchFilterList?.length > 0 &&
           searchFilterList?.map((resturant) => {
             return (
               <Link
@@ -59,16 +82,17 @@ const Body = () => {
                 key={resturant?.info?.id}
               >
                 {resturant?.info?.promoted ? (
-                  <ResturantCardPromted resData={resturant} />
+                  <ResturantCardPromted resData={resturant?.info} />
                 ) : (
-                  <ResturantCard resData={resturant} />
+                  <ResturantCard
+                    // data-testid="resCards"
+                    resData={resturant?.info}
+                  />
                 )}
               </Link>
             );
-          })
-        ) : (
-          <h1> No results found</h1>
-        )}
+          })}
+        {searchFilterList?.length > 0 && <h1> No results found</h1>}
       </div>
     </>
   );
